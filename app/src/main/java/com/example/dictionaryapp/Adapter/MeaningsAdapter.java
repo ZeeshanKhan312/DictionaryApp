@@ -35,11 +35,11 @@ public class MeaningsAdapter extends RecyclerView.Adapter<MeaningsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MeaningsViewHolder holder, int position) {
-        holder.partOfSpeech.setText(meanings.get(position).getPartOfSpeech());
-        ArrayList<DefinationModel> defination= new ArrayList<>();
-//        DefinationAdapter definationAdapter= new DefinationAdapter(context, defination);
-//        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        holder.recyclerView.setAdapter(defination);
+        holder.partOfSpeech.setText("Part of Speech: "+ meanings.get(position).getPartOfSpeech());
+        ArrayList<DefinationModel> definitions= meanings.get(position).getDefinitions();
+        DefinationAdapter definationAdapter= new DefinationAdapter(context, definitions);
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        holder.recyclerView.setAdapter(definationAdapter);
     }
 
     @Override
