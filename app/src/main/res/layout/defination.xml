@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp"
+    app:cardElevation="6dp"
     android:layout_margin="8dp"
     app:cardBackgroundColor="#C9000000">
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/defination_textView"
+            android:id="@+id/definition_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Definition: "

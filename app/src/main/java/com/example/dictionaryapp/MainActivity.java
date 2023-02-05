@@ -58,24 +58,23 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.show();
                 meanings.clear();
                 phonetics.clear();
-                APIObject.getApiInterface().searchWord(query).enqueue(new Callback<DictionaryModel>() {
+                dictionary.clear();
+                APIObject.getApiInterface().searchWord(query).enqueue(new Callback<ArrayList<DictionaryModel>>() {
                     @Override
-                    public void onResponse(Call<DictionaryModel> call, Response<DictionaryModel> response) {
-                        word.setText("Word: "+response.body().getWord());
-                        origin.setText("Origin: "+ response.body().getOrigin());
-                        dictionary.get(0).getMeanings().addAll(response.body().getMeanings());
-                        dictionary.get(0).getPhonetics().addAll(response.body().getPhonetics());
-
-                        meanings.addAll(dictionary.get(0).getMeanings());
-                        meaningAdapter.notifyDataSetChanged();
+                    public void onResponse(Call<ArrayList<DictionaryModel>> call, Response<ArrayList<DictionaryModel>> response) {
+                        dictionary.addAll(response.body());
+                        word.setText("Word: "+dictionary.get(0).getWord());
+                        origin.setText("Origin: "+dictionary.get(0).getOrigin());
                         phonetics.addAll(dictionary.get(0).getPhonetics());
                         phonticsAdapter.notifyDataSetChanged();
+                        meanings.addAll(dictionary.get(0).getMeanings());
+                        meaningAdapter.notifyDataSetChanged();
 
                         progressDialog.dismiss();
                     }
 
                     @Override
-                    public void onFailure(Call<DictionaryModel> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<DictionaryModel>> call, Throwable t) {
                         progressDialog.dismiss();
                         Toast.makeText(MainActivity.this, "Could not find the Data..!", Toast.LENGTH_SHORT).show();
                     }
